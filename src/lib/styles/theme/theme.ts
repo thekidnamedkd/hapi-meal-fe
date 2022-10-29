@@ -2,20 +2,7 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
-  colors: {
-    green: {
-      50: "#F0FFF4",
-      100: "hsl(93, 50%, 45%)",
-      200: "#9AE6B4",
-      300: "#68D391",
-      400: "#48BB78",
-      500: "#6CAC39",
-      600: "#2F855A",
-      700: "#276749",
-      800: "#22543D",
-      900: "#1C4532",
-    },
-  },
+  colors: {},
   fonts: {
     heading: "'ITC Avant Garde Gothic Std'",
     body: "'Neue Haas Grotesk Display Pro'",
@@ -25,6 +12,7 @@ const theme = extendTheme({
       body: {
         bg: "#000000",
         color: "#FFDBC1",
+        minHeight: "100vh",
       },
     },
   },

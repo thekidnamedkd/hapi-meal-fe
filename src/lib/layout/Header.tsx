@@ -1,24 +1,17 @@
-import { Heading, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
+import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "../../../public/hapi_logo.svg";
+import HeaderImage from "../../../public/top_header.png";
 
 const Header = () => {
   return (
-    <HStack
-      as="header"
-      justifyContent="space-between"
-      width="full"
-      align="center"
-    >
-      <HStack>
-        <Logo />
-        <Link href="/">
-          <a>
-            <Heading>HAPI MEAL</Heading>
-          </a>
-        </Link>
-      </HStack>
+    <HStack justifyContent="center">
+      <Link href="/">
+        <a style={{ paddingRight: "6%" }}>
+          <Image src={HeaderImage} />
+        </a>
+      </Link>
     </HStack>
   );
 };

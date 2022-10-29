@@ -9,7 +9,7 @@ const Home = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      minHeight="70vh"
+      minH="50vh"
       gap={4}
       mb={8}
       w="full"
