@@ -5,15 +5,7 @@ import CTASection from "lib/components/ui/CTASection";
 
 const Home = () => {
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      minH="50vh"
-      gap={4}
-      mb={8}
-      w="full"
-    >
+    <Flex direction="column" minH="50vh" gap={4} mb={8} w="full">
       <NextSeo title="Home" />
 
       <CTASection />

@@ -12,6 +12,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 
 import QR from "../../../../public/hapimeal_qr.svg";
 import Horrors from "../../../../public/horrors_copy.png";
@@ -22,19 +23,26 @@ const CTASection = () => {
   return (
     <VStack minH="max-content" spacing="12">
       <Image src={Horrors} />
-      <Button>TRICK OR TREAT</Button>
-      <Button onClick={onOpen} variant="none">
+      <Link href="/collectible">
+        <Button>TRICK OR TREAT</Button>
+      </Link>
+      <Button
+        onClick={onOpen}
+        variant="none"
+        fontWeight="normal"
+        textDecoration="underline"
+      >
         <a>Share</a>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent top="25%" bg="#2a2a2a">
+        <ModalContent top="25%" mx="3" bg="#2a2a2a">
           <ModalHeader />
           <ModalCloseButton />
           <ModalBody mx="auto">
             <QR />
           </ModalBody>
-          <ModalFooter />
+          <ModalFooter justifyContent="center">SHARE A HAPI MEAL</ModalFooter>
         </ModalContent>
       </Modal>
       <Spacer />

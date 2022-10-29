@@ -13,9 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
     <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out">
       <VStack margin="8">
         <Header />
-        <Box as="main" marginY={22}>
-          {children}
-        </Box>
+        <Box as="main">{children}</Box>
         <Footer />
       </VStack>
     </Box>
