@@ -1,14 +1,25 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Heading, HStack } from "@chakra-ui/react";
+import Link from "next/link";
 
-import ThemeToggle from "./ThemeToggle";
+import Logo from "../../../public/hapi_logo.svg";
 
 const Header = () => {
   return (
-    <Flex as="header" width="full" align="center">
-      <Box marginLeft="auto">
-        <ThemeToggle />
-      </Box>
-    </Flex>
+    <HStack
+      as="header"
+      justifyContent="space-between"
+      width="full"
+      align="center"
+    >
+      <HStack>
+        <Logo />
+        <Link href="/">
+          <a>
+            <Heading>HAPI MEAL</Heading>
+          </a>
+        </Link>
+      </HStack>
+    </HStack>
   );
 };
 
