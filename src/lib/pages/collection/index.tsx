@@ -21,6 +21,7 @@ import {
   Box,
   useDisclosure,
 } from "@chakra-ui/react";
+import { chains } from "@web3modal/ethereum";
 import { Web3Modal, Web3Button, useAccount } from "@web3modal/react";
 import axios from "axios";
 import { NextSeo } from "next-seo";
@@ -39,6 +40,7 @@ const config: any = {
   accentColor: "default",
   ethereum: {
     appName: "lobster",
+    chains: [chains.polygonMumbai],
   },
 };
 
