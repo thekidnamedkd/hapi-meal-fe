@@ -1,11 +1,9 @@
-import { Container, Flex, Img } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Flex, Text, SimpleGrid, Box, Link } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
-import { Text, SimpleGrid, Box, Link} from '@chakra-ui/react'
-import {ExternalLinkIcon} from '@chakra-ui/icons'
+import Image from "next/image";
 
-import Image from 'next/image'
-import {NFT_MAPPING} from "../../constants";
+import { NFT_MAPPING } from "../../constants";
 
 type ConnectionBlockProps = {
     nftItem: string
@@ -24,9 +22,9 @@ const Collection = () => {
   return (
     <Flex direction="column" gap={4} mb={8} w="100%">
       <NextSeo title="View Treat" />
-    
+
       <Flex w="full">
-        <Text fontSize="4xl" >Your Collection</Text>  
+        <Text fontSize="4xl">Your Collection</Text>
       </Flex>
 
       <SimpleGrid columns={2} spacing={2.5}>
@@ -39,10 +37,10 @@ const Collection = () => {
       </SimpleGrid>
 
       <Flex w="full">
-    {/* TODO: hook up end point to export wallet to another wallet */}
-      <Link href='https://chakra-ui.com' isExternal>
-        Export Entire Collection <ExternalLinkIcon mx='2px' />
-      </Link>
+        {/* TODO: hook up end point to export wallet to another wallet */}
+        <Link href="https://chakra-ui.com" isExternal>
+          Export Entire Collection <ExternalLinkIcon mx="2px" />
+        </Link>
       </Flex>
     </Flex>
   );

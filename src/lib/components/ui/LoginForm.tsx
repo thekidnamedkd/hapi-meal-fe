@@ -17,7 +17,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-export default function SignupForm() {
+export default function LoginForm() {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ export default function SignupForm() {
       display="flex"
       flexDirection="column"
     >
-      <Heading mb="5">Register</Heading>
+      <Heading mb="5">Login</Heading>
       <FormControl isInvalid={Boolean(errors.email)} mb="5">
         <FormLabel>Email</FormLabel>
         <Input
@@ -61,11 +61,6 @@ export default function SignupForm() {
             required: {
               value: true,
               message: "Please enter a password.",
-            },
-            pattern: {
-              value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-              message:
-                "One uppercase, one lowercase, one number, & between 5-16 chars",
             },
           })}
         />
