@@ -1,4 +1,5 @@
-import { Link, Text, HStack, Spacer } from "@chakra-ui/react";
+import { Text, HStack, Spacer } from "@chakra-ui/react";
+import Link from "next/link";
 
 function UserAccess() {
   return (
@@ -6,13 +7,13 @@ function UserAccess() {
       <Spacer />
       <Text>
         <Link href="/signup">
-          <a style={{ marginRight: "8px", textDecoration: "underline" }}>
+          <a style={{ textDecoration: "underline", marginRight: "8px" }}>
             Sign up
           </a>
         </Link>{" "}
         or{" "}
         <Link href="/login">
-          <a style={{ marginLeft: "8px", textDecoration: "underline" }}>
+          <a style={{ textDecoration: "underline", marginLeft: "8px" }}>
             Login
           </a>
         </Link>
