@@ -6,7 +6,7 @@ import murderousArnoldIMG from "../../../public/murderous_arnold.jpeg";
 import noseManBrimeManIMG from "../../../public/nose_man_brime_man.png";
 
 export const NFT_MAPPING: any = {
-    "crystal-skologna": {"tokenId": 0 ,"imgPath": crystalSkolognaIMG},
+    "crystal-skologna": {"tokenId": 0 ,"imgPath": crystalSkolognaIMG, "description": ""},
     "fry-guy": {"tokenId": 1 ,"imgPath": fryGuyIMG},
     "loving-clown-parent": {"tokenId": 2 ,"imgPath": lovingClownParentIMG},
     "master-chef": {"tokenId": 3 ,"imgPath": masterChefIMG},
