@@ -6,18 +6,19 @@ import fallbackIMG from "../../../../public/fallback.png";
 import { NFT_MAPPING } from "../../constants";
 
 type ToyViewerProps = {
-  // nftName?: string | string[] | undefined;
   id: number | undefined;
 };
 
 const ToyViewer = ({ id }: ToyViewerProps) => {
-  const description = id ? NFT_MAPPING[id].description : "Fallback";
-  const img = id ? NFT_MAPPING[id].imgPath : fallbackIMG;
-  const title = id ? NFT_MAPPING[id].title : "Fallback";
+  const description = id || id === 0 ? NFT_MAPPING[id].description : "Fallback";
+  const img = id || id === 0 ? NFT_MAPPING[id].imgPath : fallbackIMG;
+  const title = id || id === 0 ? NFT_MAPPING[id].title : "Fallback";
+
+  console.log("EWFEWW", id);
 
   return (
     <HStack justifyContent="center">
-      <VStack maxW="lg">
+      <VStack maxW="lg" alignItems="start">
         <Image style={{ borderRadius: "10px" }} src={id ? img : fallbackIMG} />
 
         <Heading>{title}</Heading>
