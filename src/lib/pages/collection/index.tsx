@@ -53,17 +53,14 @@ const Collection = () => {
       </Flex>
 
       <SimpleGrid columns={2} spacing={2.5}>
-        <ConnectionBlock id={0} />
-        <ConnectionBlock id={1} />
-        <ConnectionBlock id={2} />
-        <ConnectionBlock id={3} />
-        <ConnectionBlock id={4} />
-        <ConnectionBlock id={5} />
+        {Array.from({ length: 6 }, (_, i) => (
+          <ConnectionBlock id={i} />
+        ))}
       </SimpleGrid>
 
-      <Flex w="full">
+      <Flex w="full" justifyContent="center">
         {/* TODO: hook up end point to export wallet to another wallet */}
-        <Button onClick={onOpen} w="25%">
+        <Button onClick={onOpen} w="max-content">
           Export Entire Collection
         </Button>
       </Flex>

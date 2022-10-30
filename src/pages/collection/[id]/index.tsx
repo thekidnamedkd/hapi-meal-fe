@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/prefer-immediate-return */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Button,
   Flex,
@@ -18,18 +20,25 @@ import {
   useDisclosure,
   Container,
 } from "@chakra-ui/react";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 import fallbackIMG from "../../../../public/fallback.png";
 import ToyViewer from "../../../lib/components/ui/ToyViewer";
-import { NFT_MAPPING } from "../../../lib/constants";
 
-const CollectionItem = () => {
+const CollectionItem = ({
+  toy,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { id } = router.query;
   const parsedId = Number(id);
+
+  const { imageUri, name, description } = toy;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -55,17 +64,13 @@ const CollectionItem = () => {
               <Container flexGrow={1} w="50%">
                 <Image
                   style={{ borderRadius: "15px" }}
-                  src={id ? NFT_MAPPING[parsedId].imgPath : fallbackIMG}
+                  src={id ? imageUri : fallbackIMG}
                   objectFit="contain"
                 />
               </Container>
               <Flex flexGrow={2} direction="column" gap={2} w="50%">
-                <Heading fontSize="3xl">
-                  {id ? NFT_MAPPING[parsedId].title : "Name"}
-                </Heading>
-                <Text fontSize="xl">
-                  {id ? NFT_MAPPING[parsedId].description : "Description"}
-                </Text>
+                <Heading fontSize="3xl">{id ? name : "Name"}</Heading>
+                <Text fontSize="xl">{id ? description : "Description"}</Text>
               </Flex>
             </Flex>
             <Container mx="auto" pb="5">
@@ -91,3 +96,33 @@ const CollectionItem = () => {
 };
 
 export default CollectionItem;
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const { id } = ctx.query;
+
+  if (typeof id === "string") {
+    const toy = await fetch(
+      `https://hapi-meal-api.herokuapp.com/collections/${id}`
+    ).then(async (res) => {
+      const result = await res.json();
+      console.log("rroo", result);
+
+      return result;
+    });
+
+    if (!toy.collectionId) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: {
+        toy,
+      },
+    };
+  }
+
+  return {
+    notFound: true,
+  };
+}
