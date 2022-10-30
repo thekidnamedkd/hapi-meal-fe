@@ -55,3 +55,6 @@ export const NFT_MAPPING = [
     title: "Nose Man Brime Man",
   },
 ];
+
+export const BACKEND_API_URI = "https://hapi-meal-api.herokuapp.com";
+export const AUTH_TOKEN_HAPI_MEAL_KEY = "AUTH_TOKEN_HAPI_MEAL";

@@ -11,6 +11,9 @@ import {
 } from "@chakra-ui/react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
+import {BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY} from "../../constants";
 
 type Inputs = {
   email: string;
@@ -24,7 +27,27 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    // username: as@9jkck-1.com
+    // password: 234asdvV
+    try {
+      const dataJSON = JSON.stringify({
+        email: data.email,
+        password: data.password
+      })
+
+      const res = await axios.post(`${BACKEND_API_URI}/sign_in`, dataJSON, {
+        headers: {
+          "Content-Type": "application/json"
+        }        
+      });
+
+      localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+      console.log(`Successfully logged in: ${res.data.auth_token}`);
+    } catch (error) {
+      console.log(error)
+    }    
+  };
 
   return (
     <Box
