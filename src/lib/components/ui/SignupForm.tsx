@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Heading,
+  HStack,
 } from "@chakra-ui/react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -72,7 +73,11 @@ export default function SignupForm() {
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormControl>
 
-      <Button type="submit">Submit</Button>
+      <HStack justifyContent="end">
+        <Button type="submit" w="max-content">
+          Submit
+        </Button>
+      </HStack>
     </Box>
   );
 }

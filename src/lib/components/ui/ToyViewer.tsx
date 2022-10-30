@@ -1,28 +1,30 @@
-import { VStack, Heading, Text, Container} from "@chakra-ui/react";
+/* eslint-disable @typescript-eslint/dot-notation */
+import { Heading, Text, HStack, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 
 import fallbackIMG from "../../../../public/fallback.png";
-import {NFT_MAPPING} from "../../constants";
+import { NFT_MAPPING } from "../../constants";
 
 type ToyViewerProps = {
-  nftName: string;
+  id: number | undefined;
 };
 
-const ToyViewer = ({ nftName }: ToyViewerProps) => {
-  const description = nftName ? NFT_MAPPING[nftName]["description"] : "Fallback";
-  const img = nftName ? NFT_MAPPING[nftName]["imgPath"] : fallbackIMG;
-  const title = nftName ? NFT_MAPPING[nftName]["title"] : "Fallback";
+const ToyViewer = ({ id }: ToyViewerProps) => {
+  const description = id || id === 0 ? NFT_MAPPING[id].description : "Fallback";
+  const img = id || id === 0 ? NFT_MAPPING[id].imgPath : fallbackIMG;
+  const title = id || id === 0 ? NFT_MAPPING[id].title : "Fallback";
+
+  console.log("EWFEWW", id);
 
   return (
-    <VStack alignItems="start" w="100%">
-      <Container height="100%" width="100%">
-        <Image style={{ borderRadius: "10px"}} objectFit='contain' id={nftName} src={nftName ? img : fallbackIMG} />
-      </Container>
-      
+    <HStack justifyContent="center">
+      <VStack maxW="lg" alignItems="start">
+        <Image style={{ borderRadius: "10px" }} src={id ? img : fallbackIMG} />
 
-      <Heading>{title}</Heading>
-      <Text>{description}</Text>
-    </VStack>
+        <Heading>{title}</Heading>
+        <Text>{description}</Text>
+      </VStack>
+    </HStack>
   );
 };
 

@@ -41,7 +41,7 @@ const theme = extendTheme({
         solid: {
           bg: "rgba(255, 130, 41, 1)",
           border: "border: 1px solid #C0C0C0",
-          color: "#F8F7F4",
+          color: "black",
           _hover: {
             bg: "grey",
           },
