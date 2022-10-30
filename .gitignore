@@ -46,3 +46,4 @@ sitemap*.xml
 
 # ignore because vercel doesn't seem to like it
 yarn.lock
+package-lock.json
