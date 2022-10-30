@@ -1,16 +1,16 @@
 import { Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 
-import SignupForm from "lib/components/ui/SignupForm";
+import LoginForm from "lib/components/ui/LoginForm";
 
-const Signup = () => {
+const Login = () => {
   return (
     <Flex direction="column" gap={4} mb={8} w="full">
-      <NextSeo title="Signup" />
+      <NextSeo title="Login" />
 
-      <SignupForm />
+      <LoginForm />
     </Flex>
   );
 };
 
-export default Signup;
+export default Login;

@@ -42,7 +42,9 @@ const CTASection = () => {
           <ModalBody mx="auto">
             <QR />
           </ModalBody>
-          <ModalFooter justifyContent="center">SHARE A HAPI MEAL</ModalFooter>
+          <ModalFooter justifyContent="center" style={{ wordSpacing: ".3rem" }}>
+            SHARE A HAPI MEAL
+          </ModalFooter>
         </ModalContent>
       </Modal>
       <Spacer />
