@@ -5,16 +5,12 @@ function UserAccess() {
     <HStack w="100%" justifyContent="end">
       <Spacer />
       <Text>
-        <Link href="/signup">
-          <a style={{ marginRight: "8px", textDecoration: "underline" }}>
-            Sign up
-          </a>
+        <Link style={{ marginRight: "8px", textDecoration: "underline" }} href="/signup">
+          Sign up
         </Link>{" "}
         or{" "}
-        <Link href="/login">
-          <a style={{ marginLeft: "8px", textDecoration: "underline" }}>
-            Login
-          </a>
+        <Link style={{ marginLeft: "8px", textDecoration: "underline" }} href="/login">
+          Login
         </Link>
       </Text>
     </HStack>
