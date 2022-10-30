@@ -24,7 +24,9 @@ const CTASection = () => {
     <VStack minH="max-content" spacing="12">
       <Image src={Horrors} />
       <Link href="/collectible">
-        <Button>TRICK OR TREAT</Button>
+        <Button variant="big" fontSize={{ sm: "28px" }}>
+          TRICK OR TREAT
+        </Button>
       </Link>
       <Button
         onClick={onOpen}

@@ -19,6 +19,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   Container,
+  Box,
 } from "@chakra-ui/react";
 import type {
   GetServerSidePropsContext,
@@ -62,11 +63,15 @@ const CollectionItem = ({
             </Flex>
             <Flex mb="5">
               <Container flexGrow={1} w="50%">
-                <Image
-                  style={{ borderRadius: "15px" }}
-                  src={id ? imageUri : fallbackIMG}
-                  objectFit="contain"
-                />
+                <Box maxW="100%">
+                  <Image
+                    style={{ borderRadius: "15px" }}
+                    layout="responsive"
+                    width={1000}
+                    height={1000}
+                    src={id ? imageUri : fallbackIMG}
+                  />
+                </Box>
               </Container>
               <Flex flexGrow={2} direction="column" gap={2} w="50%">
                 <Heading fontSize="3xl">{id ? name : "Name"}</Heading>
