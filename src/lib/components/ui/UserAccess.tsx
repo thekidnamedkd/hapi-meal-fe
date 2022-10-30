@@ -1,8 +1,11 @@
+/* eslint-disable import/order */
 import { Text, HStack, Spacer } from "@chakra-ui/react";
 import Link from "next/link";
 
 function UserAccess() {
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+
     <HStack w="100%" justifyContent="end">
       <Spacer />
       <Text>

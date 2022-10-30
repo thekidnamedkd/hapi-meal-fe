@@ -52,15 +52,22 @@ export default function SignupForm() {
         "Res",
         "Bearer " + localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY)
       );
-
-      await axios.post(`${BACKEND_API_URI}/collections/${toyId}`, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywiaWF0IjoxNjY3MTEwOTU0LCJleHAiOjE2NjcxMTQ1NTR9.7bdRIYeaKq0QrzuVfaRru0G-cLDzOQmKFBTvikoJM2o`,
-        },
-      });
-
-      router.push(`/collection/${toyId}`);
-
+      if (toyId) {
+        const authToken = localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY);
+        if (authToken == null) {
+          return;
+        }
+        await axios({
+          url: `${BACKEND_API_URI}/collections/${toyId}`,
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        router.push(`/collection/${toyId}`);
+      } else {
+        router.push("/collection");
+      }
       console.log(`Successfully signed up: ${res.data.auth_token}`);
     } catch (error) {
       console.log(error);

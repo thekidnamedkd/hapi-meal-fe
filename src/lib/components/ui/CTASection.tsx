@@ -36,9 +36,15 @@ const CTASection = () => {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent top="25%" mx="3" bg="#2a2a2a">
-          <ModalHeader />
-          <ModalCloseButton />
+        <ModalContent
+          maxW="sm"
+          borderRadius="50px"
+          top="25%"
+          mx="3"
+          bg="#2a2a2a"
+        >
+          <ModalHeader mb="5" />
+          <ModalCloseButton p="6" right="2rem" />
           <ModalBody mx="auto">
             <QR />
           </ModalBody>

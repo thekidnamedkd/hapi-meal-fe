@@ -26,7 +26,9 @@ const GetCollectible = () => {
         <Link href={`/signup?toyId=${randomId}`}>
           <Button>Sign Up</Button>
         </Link>
-        <Button variant="none">Login</Button>
+        <Link href={`/login?toyId=${randomId}`}>
+          <Button variant="none">Login</Button>
+        </Link>
       </HStack>
     </VStack>
   );

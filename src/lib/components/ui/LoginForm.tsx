@@ -46,14 +46,21 @@ export default function LoginForm() {
         },
       });
 
-      await localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+      localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
 
-      await axios.post(`${BACKEND_API_URI}/collections/${toyId}`, {
-        headers: {
-          Authorization: `Bearer ${res.data.auth_token}`,
-        },
-      });
+      if (toyId) {
+        await axios({
+          url: `${BACKEND_API_URI}/collections/${toyId}`,
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${res.data.auth_token}`,
+          },
+        });
 
+        router.push(`/collection/${toyId}`);
+      } else {
+        router.push("/collection");
+      }
       console.log(`Successfully logged in: ${res.data.auth_token}`);
     } catch (error) {
       console.log(error);

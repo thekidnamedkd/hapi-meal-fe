@@ -83,6 +83,7 @@ const Collection = () => {
     if (userCollection == null) {
       return "Empty collection ...";
     }
+
     return userCollection.map(
       (data: { collectionId: number }, idx: Key | null | undefined) => {
         // eslint-disable-next-line react/no-array-index-key
