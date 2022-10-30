@@ -6,15 +6,15 @@ import Image from "next/image";
 import { NFT_MAPPING } from "../../constants";
 
 type ConnectionBlockProps = {
-  nftItem: string;
+  id: number;
 };
-const ConnectionBlock = ({ nftItem }: ConnectionBlockProps) => {
+const ConnectionBlock = ({ id }: ConnectionBlockProps) => {
   return (
     <Box height="100%" width="100%">
-      <Link href={`/collection/${nftItem}`}>
+      <Link href={`/collection/${id}`}>
         <Image
           style={{ borderRadius: "15px" }}
-          src={NFT_MAPPING[nftItem].imgPath}
+          src={NFT_MAPPING[id].imgPath}
           objectFit="contain"
         />
       </Link>
@@ -32,12 +32,12 @@ const Collection = () => {
       </Flex>
 
       <SimpleGrid columns={2} spacing={2.5}>
-        <ConnectionBlock nftItem="crystal-skologna" />
-        <ConnectionBlock nftItem="fry-guy" />
-        <ConnectionBlock nftItem="loving-clown-parent" />
-        <ConnectionBlock nftItem="master-chef" />
-        <ConnectionBlock nftItem="murderous-arnold" />
-        <ConnectionBlock nftItem="nose-man-brime-man" />
+        <ConnectionBlock id={0} />
+        <ConnectionBlock id={1} />
+        <ConnectionBlock id={2} />
+        <ConnectionBlock id={3} />
+        <ConnectionBlock id={4} />
+        <ConnectionBlock id={5} />
       </SimpleGrid>
 
       <Flex w="full">
