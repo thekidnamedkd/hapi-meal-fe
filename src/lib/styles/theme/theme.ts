@@ -43,14 +43,15 @@ const theme = extendTheme({
           border: "border: 1px solid #C0C0C0",
           color: "black",
           _hover: {
-            bg: "grey",
+            bg: "#78C03F",
           },
         },
-        create: {
-          bg: "#6CAC39",
+        big: {
+          bg: "rgba(255, 130, 41, 1)",
           border: "border: 1px solid #C0C0C0",
-          color: "transparent",
-          fontWeight: "500",
+          color: "black",
+          padding: "10% 15%",
+          fontWeight: "bolder",
           _hover: {
             bg: "#78C03F",
           },

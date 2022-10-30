@@ -6,7 +6,7 @@ import SignupForm from "lib/components/ui/SignupForm";
 const Signup = () => {
   return (
     <Flex direction="column" gap={4} mb={8} w="full">
-      <NextSeo title="Signup" />
+      <NextSeo title="Sign Up" />
 
       <SignupForm />
     </Flex>
