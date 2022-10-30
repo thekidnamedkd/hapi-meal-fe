@@ -22,8 +22,10 @@ import {
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
+import axios from "axios";
 
-import { NFT_MAPPING } from "../../constants";
+import {NFT_MAPPING, BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY} from "../../constants";
+import { useEffect, useState, useCallback } from "react";
 
 type ConnectionBlockProps = {
   id: number;
@@ -44,21 +46,48 @@ const ConnectionBlock = ({ id }: ConnectionBlockProps) => {
 const Collection = () => {
   // TODO: pull NFTs in wallet from database and render here
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userCollection, setUserCollection] = useState([]);
+
+  const fetchUserCollection = useCallback(async (authToken: string) => {
+    try {
+      const res = await axios.get(`${BACKEND_API_URI}/collectibles`, {
+        headers: {
+          "Authorization": `Bearer ${authToken}` 
+        }
+      });              
+      if (res.data == null) {
+        setUserCollection([])
+      } else {
+        setUserCollection(res.data);
+      };
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }, [userCollection]);
+
+  useEffect(() => { 
+    const authToken = localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY);    
+    if (authToken == null) {return};
+    fetchUserCollection(authToken);
+  }, []);
+
+  const renderConnectionBlocks = () => {
+    if (userCollection == null) {return "Empty collection ..."}
+    return userCollection.map((data, idx) => {
+      return <ConnectionBlock id={data["collectionId"]} key={idx} />
+    })
+  }
+
   return (
     <Flex direction="column" gap={4} mb={8} w="100%">
       <NextSeo title="View Treat" />
-
       <Flex w="full">
         <Text fontSize="4xl">Your Collection</Text>
       </Flex>
 
-      <SimpleGrid columns={2} spacing={2.5}>
-        <ConnectionBlock id={0} />
-        <ConnectionBlock id={1} />
-        <ConnectionBlock id={2} />
-        <ConnectionBlock id={3} />
-        <ConnectionBlock id={4} />
-        <ConnectionBlock id={5} />
+      <SimpleGrid columns={2} spacing={2.5}>        
+        {renderConnectionBlocks()}
       </SimpleGrid>
 
       <Flex w="full">
