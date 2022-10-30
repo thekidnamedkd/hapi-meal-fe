@@ -4,8 +4,8 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   colors: {},
   fonts: {
-    heading: "'ITC Avant Garde Gothic Std'",
-    body: "'Neue Haas Grotesk Display Pro'",
+    heading: `'Inter', sans-serif`,
+    body: `'Inter', sans-serif`,
   },
   styles: {
     global: {

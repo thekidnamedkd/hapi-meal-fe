@@ -21,7 +21,6 @@ import {
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 import fallbackIMG from "../../../../public/fallback.png";
 import ToyViewer from "../../../lib/components/ui/ToyViewer";
@@ -31,12 +30,8 @@ const CollectionItem = () => {
   const router = useRouter();
   const { id } = router.query;
   const parsedId = Number(id);
-  console.log("ororor", id);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
-    console.log(router.query);
-  }, [router.query]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex direction="column" gap={4} mb={8} w="100%">
