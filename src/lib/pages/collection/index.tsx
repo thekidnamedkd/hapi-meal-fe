@@ -21,6 +21,7 @@ import {
   Box,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Web3Modal, Web3Button, useAccount } from "@web3modal/react";
 import axios from "axios";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
@@ -31,6 +32,15 @@ import {
   BACKEND_API_URI,
   AUTH_TOKEN_HAPI_MEAL_KEY,
 } from "../../constants";
+
+const config: any = {
+  projectId: "58d47adddd7075aff19f19004b8fc882",
+  theme: "dark",
+  accentColor: "default",
+  ethereum: {
+    appName: "lobster",
+  },
+};
 
 type ConnectionBlockProps = {
   id: number;
@@ -48,7 +58,9 @@ const ConnectionBlock = ({ id }: ConnectionBlockProps) => {
     </Box>
   );
 };
+
 const Collection = () => {
+  const { account } = useAccount();
   // TODO: pull NFTs in wallet from database and render here
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userCollection, setUserCollection] = useState<any>([]);
@@ -105,19 +117,28 @@ const Collection = () => {
           Export Entire Collection
         </Button>
       </Flex>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(10px) hue-rotate(90deg)" />
         <ModalContent mx="3" bg="rgba(0,0,0,0.8)">
-          <ModalHeader />
+          <ModalHeader>
+            <Web3Button />
+          </ModalHeader>
+
           <ModalCloseButton />
+
           <ModalBody>
+            <Web3Modal config={config} />
             <Flex w="full" pb="5">
               <Heading fontSize="4xl">Export Collectibles</Heading>
             </Flex>
             <Container mx="auto" pb="5">
               <FormControl>
                 <FormLabel>Wallet Address</FormLabel>
-                <Input type="string" />
+                <Input
+                  type="string"
+                  value={account.isConnected ? account.address : ""}
+                />
                 <Center>
                   <Button mt={4} colorScheme="orange" type="submit">
                     Submit
