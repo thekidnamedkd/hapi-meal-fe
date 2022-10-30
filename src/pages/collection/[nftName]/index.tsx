@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex, VStack } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -14,9 +14,12 @@ const CollectionItem = () => {
     console.log(router.query);
   }, [router.query]);
   return (
-    <Flex direction="column" gap={4} mb={8} w="full">
-      <NextSeo title="View Treat" />
-      <ToyViewer id={`${1}`} />
+    <Flex direction="column" gap={4} mb={8}>
+      <NextSeo title="Collection" />
+      <VStack>
+        <ToyViewer id={`${1}`} />
+        <Button w="200px">Send</Button>
+      </VStack>
     </Flex>
   );
 };
