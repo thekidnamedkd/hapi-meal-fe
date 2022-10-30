@@ -13,3 +13,5 @@ export const NFT_MAPPING: any = {
     "murderous-arnold": {"tokenId": 4 ,"imgPath": murderousArnoldIMG, "description": "This plastic toy is completely harmless as a digital collectible. However, should he appear in your bathroom mirror after you chant “Balmy Arnold” 3 times, there is no hiding from such an absolute creature.", "title": "Murderous Arnold"},
     "nose-man-brime-man": {"tokenId": 5 ,"imgPath": noseManBrimeManIMG, "description": "Nose man haunts you with a single nostril, while brim man lurks in the distance. A satchel bag, or parachute pants, there is no espacing the immaculate style of these masked horrors.", "title": "Nose Man Brime Man"},
 }
+
+export const BACKEND_API_URI = "https://hapi-meal-api.herokuapp.com/";
