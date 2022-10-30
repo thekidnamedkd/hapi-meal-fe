@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Button,
   Flex,
@@ -20,10 +21,17 @@ import {
   Box,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
+import type { Key } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-import { NFT_MAPPING } from "../../constants";
+import {
+  NFT_MAPPING,
+  BACKEND_API_URI,
+  AUTH_TOKEN_HAPI_MEAL_KEY,
+} from "../../constants";
 
 type ConnectionBlockProps = {
   id: number;
@@ -44,18 +52,54 @@ const ConnectionBlock = ({ id }: ConnectionBlockProps) => {
 const Collection = () => {
   // TODO: pull NFTs in wallet from database and render here
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userCollection, setUserCollection] = useState<any>([]);
+
+  const fetchUserCollection = useCallback(async (authToken: string) => {
+    try {
+      const res = await axios.get(`${BACKEND_API_URI}/collectibles`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      if (res.data == null) {
+        setUserCollection([]);
+      } else {
+        setUserCollection(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY);
+    if (authToken == null) {
+      return;
+    }
+    fetchUserCollection(authToken);
+  }, [fetchUserCollection]);
+
+  const renderConnectionBlocks = () => {
+    if (userCollection == null) {
+      return "Empty collection ...";
+    }
+    return userCollection.map(
+      (data: { collectionId: number }, idx: Key | null | undefined) => {
+        // eslint-disable-next-line react/no-array-index-key
+        return <ConnectionBlock id={data.collectionId} key={idx} />;
+      }
+    );
+  };
+
   return (
     <Flex direction="column" gap={4} mb={8} w="100%">
       <NextSeo title="View Treat" />
-
       <Flex w="full">
         <Text fontSize="4xl">Your Collection</Text>
       </Flex>
 
       <SimpleGrid columns={2} spacing={2.5}>
-        {Array.from({ length: 6 }, (_, i) => (
-          <ConnectionBlock id={i} />
-        ))}
+        {renderConnectionBlocks()}
       </SimpleGrid>
 
       <Flex w="full" justifyContent="center">
