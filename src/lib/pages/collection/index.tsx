@@ -24,7 +24,6 @@ import {
 import axios from "axios";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
-import type { Key } from "react";
 import { useEffect, useState, useCallback } from "react";
 
 import {
@@ -61,7 +60,7 @@ const Collection = () => {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      if (res.data == null) {
+      if (res.data == null || res.data.length === 0) {
         setUserCollection([]);
       } else {
         setUserCollection(res.data);
@@ -80,16 +79,13 @@ const Collection = () => {
   }, [fetchUserCollection]);
 
   const renderConnectionBlocks = () => {
-    if (userCollection == null) {
+    if (userCollection == null || userCollection.length === 0) {
       return "Empty collection ...";
     }
-
-    return userCollection.map(
-      (data: { collectionId: number }, idx: Key | null | undefined) => {
-        // eslint-disable-next-line react/no-array-index-key
-        return <ConnectionBlock id={data.collectionId} key={idx} />;
-      }
-    );
+    return userCollection.map((data: any, idx: any) => {
+      // eslint-disable-next-line @typescript-eslint/dot-notation, react/no-array-index-key
+      return <ConnectionBlock id={data["collectionId"]} key={idx} />;
+    });
   };
 
   return (
