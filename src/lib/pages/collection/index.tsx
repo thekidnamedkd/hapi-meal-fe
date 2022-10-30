@@ -26,8 +26,9 @@ import { Web3Modal, Web3Button, useAccount } from "@web3modal/react";
 import axios from "axios";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
-import { useEffect, useState, useCallback } from "react";
-
+import { useEffect, useState, useCallback, MouseEventHandler } from "react";
+import { SubmitHandler } from "react-hook-form/dist/types";
+import { useRouter } from "next/router";
 import {
   NFT_MAPPING,
   BACKEND_API_URI,
@@ -42,6 +43,10 @@ const config: any = {
     appName: "lobster",
     chains: [chains.polygonMumbai],
   },
+};
+
+type Inputs = {
+  adddress: string;
 };
 
 type ConnectionBlockProps = {
@@ -66,6 +71,7 @@ const Collection = () => {
   // TODO: pull NFTs in wallet from database and render here
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userCollection, setUserCollection] = useState<any>([]);
+  const router = useRouter();
 
   const fetchUserCollection = useCallback(async (authToken: string) => {
     try {
@@ -100,6 +106,30 @@ const Collection = () => {
       // eslint-disable-next-line @typescript-eslint/dot-notation, react/no-array-index-key
       return <ConnectionBlock id={data["collectionId"]} key={idx} />;
     });
+  };
+
+  const onSubmit: MouseEventHandler<HTMLButtonElement> = async () => {
+    try {
+      console.log(account.address)
+      const dataBody = {
+        toAddress: account.address
+      }
+      const dataJSON = JSON.stringify(dataBody);
+
+      const authToken = localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY);
+
+      const res = await axios.post(`${BACKEND_API_URI}/export`, dataJSON, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`
+        },
+      });
+      console.log(res);
+      console.log(`Successfully exported to: ${dataBody.toAddress}`);
+      router.push("/collection");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -139,10 +169,11 @@ const Collection = () => {
                 <FormLabel>Wallet Address</FormLabel>
                 <Input
                   type="string"
+                  readOnly
                   value={account.isConnected ? account.address : ""}
                 />
                 <Center>
-                  <Button mt={4} colorScheme="orange" type="submit">
+                  <Button mt={4} colorScheme="orange" type="submit" onClick={onSubmit}>
                     Submit
                   </Button>
                 </Center>
