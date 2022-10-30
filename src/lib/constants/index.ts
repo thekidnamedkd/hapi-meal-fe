@@ -56,5 +56,6 @@ export const NFT_MAPPING = [
   },
 ];
 
-export const BACKEND_API_URI = "https://hapi-meal-api.herokuapp.com";
-export const AUTH_TOKEN_HAPI_MEAL_KEY = "AUTH_TOKEN_HAPI_MEAL";
+export const BACKEND_API_URI: string = "https://hapi-meal-api.herokuapp.com";
+export const AUTH_TOKEN_HAPI_MEAL_KEY: string = "AUTH_TOKEN_HAPI_MEAL";
+export const AUTH_CREDENTIALS_KEY: string = "AUTH_CREDENTIALS";

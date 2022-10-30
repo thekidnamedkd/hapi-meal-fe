@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-import { BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY } from "../../constants";
+import { BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY} from "../../constants";
+import {CredentialContext} from "../../contexts";
 
 type Inputs = {
   email: string;
@@ -26,8 +28,8 @@ type Inputs = {
 export default function SignupForm() {
   const router = useRouter();
   const { toyId } = router.query;
-  console.log("rgegerg", router.query);
-  console.log("rgege3r23423g", toyId);
+  const { credential, setCredential} = useContext(CredentialContext);
+
   const {
     register,
     handleSubmit,
@@ -35,10 +37,11 @@ export default function SignupForm() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const dataJSON = JSON.stringify({
+      const dataBody = {
         email: data.email,
         password: data.password,
-      });
+      }
+      const dataJSON = JSON.stringify(dataBody);
 
       const res = await axios.post(`${BACKEND_API_URI}/sign_up`, dataJSON, {
         headers: {
@@ -47,6 +50,7 @@ export default function SignupForm() {
       });
 
       localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+      setCredential(dataBody);
 
       console.log(
         "Res",
