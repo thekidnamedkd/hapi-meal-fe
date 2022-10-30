@@ -13,7 +13,9 @@ type CollectionItemProps = {
 const CollectionItem = ({nftItem}: CollectionItemProps) => {
     return (
         <Box height="100%" width="100%">
-            <Image style={{"borderRadius": "15px"}} src={NFT_MAPPING[nftItem]["imgPath"]} objectFit='contain'/>
+            <Link href={`/collection/${nftItem}`}>
+                <Image style={{"borderRadius": "15px"}} src={NFT_MAPPING[nftItem]["imgPath"]} objectFit='contain'/>
+            </Link>
         </Box>
     )
 }
@@ -28,12 +30,12 @@ const Collection = () => {
       </Flex>
 
       <SimpleGrid columns={2} spacing={2.5}>
-        <CollectionItem nftItem="crystalSkologna"/>
-        <CollectionItem nftItem="fryGuy"/>
-        <CollectionItem nftItem="lovingClownParent"/>
-        <CollectionItem nftItem="masterChef"/>
-        <CollectionItem nftItem="murderousArnold"/>
-        <CollectionItem nftItem="noseManBrimeMan"/>
+        <CollectionItem nftItem="crystal-skologna"/>
+        <CollectionItem nftItem="fry-guy"/>
+        <CollectionItem nftItem="loving-clown-parent"/>
+        <CollectionItem nftItem="master-chef"/>
+        <CollectionItem nftItem="murderous-arnold"/>
+        <CollectionItem nftItem="nose-man-brime-man"/>
       </SimpleGrid>
 
       <Flex w="full">
