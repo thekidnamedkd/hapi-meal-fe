@@ -23,7 +23,7 @@ const GetCollectible = () => {
       </Box>
       <ToyViewer id={randomId} />
       <HStack>
-        <Link href={`/signup?${randomId}`}>
+        <Link href={`/signup?toyId=${randomId}`}>
           <Button>Sign Up</Button>
         </Link>
         <Button variant="none">Login</Button>

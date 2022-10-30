@@ -9,11 +9,12 @@ import {
   Heading,
   HStack,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 
-import {BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY} from "../../constants";
+import { BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY } from "../../constants";
 
 type Inputs = {
   email: string;
@@ -22,6 +23,9 @@ type Inputs = {
 };
 
 export default function LoginForm() {
+  const router = useRouter();
+  const { toyId } = router.query;
+
   const {
     register,
     handleSubmit,
@@ -33,20 +37,27 @@ export default function LoginForm() {
     try {
       const dataJSON = JSON.stringify({
         email: data.email,
-        password: data.password
-      })
+        password: data.password,
+      });
 
       const res = await axios.post(`${BACKEND_API_URI}/sign_in`, dataJSON, {
         headers: {
-          "Content-Type": "application/json"
-        }        
+          "Content-Type": "application/json",
+        },
       });
 
-      localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+      await localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+
+      await axios.post(`${BACKEND_API_URI}/collections/${toyId}`, {
+        headers: {
+          Authorization: `Bearer ${res.data.auth_token}`,
+        },
+      });
+
       console.log(`Successfully logged in: ${res.data.auth_token}`);
     } catch (error) {
-      console.log(error)
-    }    
+      console.log(error);
+    }
   };
 
   return (

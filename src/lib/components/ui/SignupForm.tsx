@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-useless-escape */
 import {
   Input,
@@ -9,11 +10,12 @@ import {
   Heading,
   HStack,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 
-import {BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY} from "../../constants";
+import { BACKEND_API_URI, AUTH_TOKEN_HAPI_MEAL_KEY } from "../../constants";
 
 type Inputs = {
   email: string;
@@ -22,6 +24,10 @@ type Inputs = {
 };
 
 export default function SignupForm() {
+  const router = useRouter();
+  const { toyId } = router.query;
+  console.log("rgegerg", router.query);
+  console.log("rgege3r23423g", toyId);
   const {
     register,
     handleSubmit,
@@ -31,20 +37,34 @@ export default function SignupForm() {
     try {
       const dataJSON = JSON.stringify({
         email: data.email,
-        password: data.password
-      })
+        password: data.password,
+      });
 
       const res = await axios.post(`${BACKEND_API_URI}/sign_up`, dataJSON, {
         headers: {
-          "Content-Type": "application/json"
-        }        
+          "Content-Type": "application/json",
+        },
       });
 
       localStorage.setItem(AUTH_TOKEN_HAPI_MEAL_KEY, res.data.auth_token);
+
+      console.log(
+        "Res",
+        "Bearer " + localStorage.getItem(AUTH_TOKEN_HAPI_MEAL_KEY)
+      );
+
+      await axios.post(`${BACKEND_API_URI}/collections/${toyId}`, {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywiaWF0IjoxNjY3MTEwOTU0LCJleHAiOjE2NjcxMTQ1NTR9.7bdRIYeaKq0QrzuVfaRru0G-cLDzOQmKFBTvikoJM2o`,
+        },
+      });
+
+      router.push(`/collection/${toyId}`);
+
       console.log(`Successfully signed up: ${res.data.auth_token}`);
     } catch (error) {
-      console.log(error)
-    }    
+      console.log(error);
+    }
   };
 
   return (
