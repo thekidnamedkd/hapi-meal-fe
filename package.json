@@ -8,15 +8,10 @@
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "eslint src --fix && yarn format",
-    "type-check": "tsc --noEmit",
-    "format": "prettier --write src",
     "up": "yarn upgrade-interactive",
     "up-latest": "yarn up --latest",
     "release": "cross-env HUSKY=0 standard-version",
-    "push-release": "git push --follow-tags origin main",
-    "prepare": "husky install"
+    "push-release": "git push --follow-tags origin main"
   },
   "dependencies": {
     "@chakra-ui/icon": "^3.0.11",
@@ -40,20 +35,10 @@
     "react-icons": "^4.6.0"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^17.1.0",
-    "@commitlint/cz-commitlint": "^17.1.2",
     "@svgr/webpack": "^6.5.1",
     "@types/react": "^18.0.21",
-    "commitizen": "^4.2.5",
-    "commitlint": "^17.1.2",
     "cross-env": "^7.0.3",
-    "eslint": "^8.25.0",
-    "eslint-config-next": "^12.3.1",
-    "eslint-config-sznm": "^1.0.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "next-sitemap": "^3.1.25",
-    "prettier": "^2.7.1",
     "standard-version": "^9.5.0",
     "typescript": "^4.8.4"
   }

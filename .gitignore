@@ -45,4 +45,4 @@ sitemap*.xml
 *.tsbuildinfo
 
 # ignore because vercel doesn't seem to like it
-package-lock.json
+yarn.lock
