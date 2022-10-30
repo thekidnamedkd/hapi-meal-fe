@@ -55,7 +55,7 @@ const Collection = () => {
           "Authorization": `Bearer ${authToken}` 
         }
       });              
-      if (res.data == null) {
+      if (res.data == null || res.data.length === 0) {
         setUserCollection([])
       } else {
         setUserCollection(res.data);
@@ -73,7 +73,7 @@ const Collection = () => {
   }, []);
 
   const renderConnectionBlocks = () => {
-    if (userCollection == null) {return "Empty collection ..."}
+    if (userCollection == null || userCollection.length === 0) {return "Empty collection ..."}
     return userCollection.map((data, idx) => {
       return <ConnectionBlock id={data["collectionId"]} key={idx} />
     })
