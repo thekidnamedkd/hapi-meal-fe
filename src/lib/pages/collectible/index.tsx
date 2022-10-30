@@ -9,8 +9,6 @@ import ToyViewer from "../../components/ui/ToyViewer";
 const GetCollectible = () => {
   const [randomId, setRandomId] = useState<number>();
 
-  console.log("434343", randomId);
-
   useEffect(() => {
     const result = Math.floor(Math.random() * 5);
     setRandomId(result);

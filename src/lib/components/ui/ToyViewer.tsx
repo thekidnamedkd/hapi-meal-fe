@@ -14,8 +14,6 @@ const ToyViewer = ({ id }: ToyViewerProps) => {
   const img = id || id === 0 ? NFT_MAPPING[id].imgPath : fallbackIMG;
   const title = id || id === 0 ? NFT_MAPPING[id].title : "Fallback";
 
-  console.log("EWFEWW", id);
-
   return (
     <HStack justifyContent="center">
       <VStack maxW="lg" alignItems="start">
